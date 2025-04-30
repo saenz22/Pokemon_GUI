@@ -26,12 +26,55 @@ public class WindowBuilder extends JFrame implements ActionListener, KeyListener
         return nombre2;
     }
 
+    public String getPokemon1() {
+        return pokemon1;
+    }
+
+    public String getPokemon2() {
+        return pokemon2;
+    }
+
+    public String getPokemon3() {
+        return pokemon3;
+    }
+
+    public String getPokemon4() {
+        return pokemon4;
+    }
+
+    public String getPokemon5() {
+        return pokemon5;
+    }
+
+    public String getPokemon6() {
+        return pokemon6;
+    }
+
+
+
     private Timer timer; // Declaramos el Timer como un campo de la clase
     private int currentPanel = 0;
+
+
     private String nombre1 = "";
     private String nombre2 = "";
+    private String pokemon1 = "";
+    private String pokemon2 = "";
+    private String pokemon3 = "";
+    private String pokemon4 = "";
+    private String pokemon5 = "";
+    private String pokemon6 = "";
+
+
     private JTextField jugador1Field = new JTextField();
     private JTextField jugador2Field = new JTextField();
+    private JTextField poke1Field = new JTextField();
+    private JTextField poke2Field = new JTextField();
+    private JTextField poke3Field = new JTextField();
+    private JTextField poke4Field = new JTextField();
+    private JTextField poke5Field = new JTextField();
+    private JTextField poke6Field = new JTextField();
+
 
     public WindowBuilder() {
         setTitle("Pokémon");
@@ -117,7 +160,7 @@ public class WindowBuilder extends JFrame implements ActionListener, KeyListener
     private void switchToNextPanel(JPanel panel) {
         getContentPane().removeAll(); // Limpiar la ventana
         add(panel); // Añadir el nuevo panel
-        if ( currentPanel == 2 || currentPanel == 3 || currentPanel == 4) {
+        if ( currentPanel != 1) {
             panel.setFocusable(true); // Habilitar el foco para el panel
             panel.requestFocusInWindow(); // Solicitar el foco al panel
         }
@@ -281,6 +324,145 @@ public class WindowBuilder extends JFrame implements ActionListener, KeyListener
 
         return fourthPanel; // Usamos 'this' para añadir el cuarto panel
     }
+
+    private JPanel showFifthPanel() {
+    currentPanel = 5; // Cambiamos el panel actual a 5
+    JPanel pokemonPanel = new JPanel();
+    pokemonPanel.setLayout(null);
+    pokemonPanel.setBackground(new Color(10, 20, 48)); // Fondo oscuro
+
+    pokemonPanel.addKeyListener(this);
+    // Título
+    String solicitarpokemon = "¡Selecciona tus pokemones " + nombre1 + "!";
+    JLabel titulo = new JLabel(solicitarpokemon);
+    titulo.setForeground(Color.WHITE);
+    titulo.setFont(new Font("Monospaced", Font.BOLD, 18));
+    titulo.setBounds(120, 20, 500, 30);
+    pokemonPanel.add(titulo);
+
+    // Etiqueta y campo para Pokemon 1
+    JLabel label1 = new JLabel("Pokemon 1");
+    label1.setForeground(Color.WHITE);
+    label1.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label1.setBounds(200, 60, 200, 25);
+    pokemonPanel.add(label1);
+
+
+    poke1Field.setBounds(200, 90, 200, 25);
+    poke1Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke1Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke1Field.setBackground(Color.WHITE);
+    poke1Field.setForeground(Color.BLACK);
+    poke1Field.addKeyListener(this); // Añadir el KeyListener al campo de texto
+    pokemonPanel.add(poke1Field);
+
+    // Etiqueta y campo para Pokemon 2
+    JLabel label2 = new JLabel("Pokemon 2");
+    label2.setForeground(Color.WHITE);
+    label2.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label2.setBounds(200, 120, 200, 25);
+    pokemonPanel.add(label2);
+
+   
+    poke2Field.setBounds(200, 150, 200, 25);
+    poke2Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke2Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke2Field.setBackground(Color.WHITE);
+    poke2Field.setForeground(Color.BLACK);
+    poke2Field.addKeyListener(this); // Añadir el KeyListener al campo de texto
+    pokemonPanel.add(poke2Field);
+
+    // Etiqueta y campo para Pokemon 3
+    JLabel label3 = new JLabel("Pokemon 3");
+    label3.setForeground(Color.WHITE);
+    label3.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label3.setBounds(200, 180, 200, 25);
+    pokemonPanel.add(label3);
+
+    poke3Field.setBounds(200, 210, 200, 25);
+    poke3Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke3Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke3Field.setBackground(Color.WHITE);
+    poke3Field.setForeground(Color.BLACK);
+    poke3Field.addKeyListener(this); // Añadir el KeyListener al campo de texto
+    pokemonPanel.add(poke3Field);
+
+    // Crear la flecha roja
+    JLabel flecha = new JLabel("▼");
+    flecha.setForeground(Color.RED);
+    flecha.setBounds(430, 250, 30, 30); // Nueva posición razonable de la flecha
+    flecha.setFont(new Font("Arial", Font.BOLD, 20)); // Fuente de la flecha    
+
+    // Añadir la flecha encima del cuadro de texto
+    pokemonPanel.add(flecha);
+
+    
+
+    return pokemonPanel;
+}
+
+private JPanel showSixthPanel() {
+    currentPanel = 6; // Cambiamos el panel actual a 6
+    JPanel pokemonPanel = new JPanel();
+    pokemonPanel.setLayout(null);
+    pokemonPanel.setBackground(new Color(10, 20, 48)); // Fondo oscuro
+
+    pokemonPanel.addKeyListener(this);  
+    // Título
+    String solicitarpokemon = "¡Selecciona tus pokemones " + nombre2 + "!";
+    JLabel titulo = new JLabel(solicitarpokemon);
+    titulo.setForeground(Color.WHITE);
+    titulo.setFont(new Font("Monospaced", Font.BOLD, 18));    
+    titulo.setBounds(120, 20, 500, 30);
+    pokemonPanel.add(titulo);
+
+    // Etiqueta y campo para Pokemon 1
+    JLabel label1 = new JLabel("Pokemon 1");
+    label1.setForeground(Color.WHITE);
+    label1.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label1.setBounds(200, 60, 200, 25);
+    pokemonPanel.add(label1);
+    poke4Field.setBounds(200, 90, 200, 25);
+    poke4Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke4Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke4Field.setBackground(Color.WHITE);
+    poke4Field.setForeground(Color.BLACK);
+    pokemonPanel.add(poke4Field);
+    // Etiqueta y campo para Pokemon 2
+    JLabel label2 = new JLabel("Pokemon 2");
+    label2.setForeground(Color.WHITE);
+    label2.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label2.setBounds(200, 120, 200, 25);
+    pokemonPanel.add(label2);
+    poke5Field.setBounds(200, 150, 200, 25);
+    poke5Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke5Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke5Field.setBackground(Color.WHITE);
+    poke5Field.setForeground(Color.BLACK);
+    pokemonPanel.add(poke5Field);
+    // Etiqueta y campo para Pokemon 3
+    JLabel label3 = new JLabel("Pokemon 3");
+    label3.setForeground(Color.WHITE);
+    label3.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    label3.setBounds(200, 180, 200, 25);
+    pokemonPanel.add(label3);
+    poke6Field.setBounds(200, 210, 200, 25);
+    poke6Field.setFont(new Font("Monospaced", Font.PLAIN, 13));
+    poke6Field.setBorder(BorderFactory.createLineBorder(new Color(100, 180, 255), 2));
+    poke6Field.setBackground(Color.WHITE);
+    poke6Field.setForeground(Color.BLACK);
+    pokemonPanel.add(poke6Field);
+    // Crear la flecha roja
+    JLabel flecha = new JLabel("▼");
+    flecha.setForeground(Color.RED);
+    flecha.setBounds(430, 250, 30, 30); // Nueva posición razonable de la flecha
+    flecha.setFont(new Font("Arial", Font.BOLD, 20)); // Fuente de la flecha
+    // Añadir la flecha encima del cuadro de texto
+    pokemonPanel.add(flecha);
+    return pokemonPanel;
+}
+
+
     @Override
     public void keyTyped(KeyEvent e) {
        
@@ -302,6 +484,18 @@ public class WindowBuilder extends JFrame implements ActionListener, KeyListener
                         switchToNextPanel(showFourthPanel());
                     }
                     break;
+                case 4:switchToNextPanel(showFifthPanel());
+                    break;
+                case 5:
+                pokemon1 =  poke1Field.getText();
+                pokemon2 =  poke2Field.getText();
+                pokemon3 =  poke3Field.getText();
+                if (pokemon1.isEmpty() || pokemon2.isEmpty() || pokemon3.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese todos los nombres.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    switchToNextPanel(showSixthPanel());
+                }
+                System.out.println(pokemon1 + " " + pokemon2 + " " + pokemon3);
                 default:
                     break;
             }
