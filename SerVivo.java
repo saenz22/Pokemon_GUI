@@ -16,6 +16,8 @@ public abstract class SerVivo {
         this.nombre = nombre;
     }
 
+    // MÉTODOS CANDIDATOS PARA SER DEL CONTROLADOR
+
     // Método de saludo
     public void entrada() {
         System.out.println("Hola");

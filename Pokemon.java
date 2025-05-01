@@ -114,13 +114,14 @@ public class Pokemon extends SerVivo {
     public float calculoDaño(float potencia, float stab, short tipoAtk, short dfEnemigo, TipoAtaquePokemon tipoEnemigo) {
 
         float variabilidad = (float) (Math.random() * (1f - 0.85f)) + 0.85f;
+        // Fórmula oficial de cálculo de daño en Pokemon
         float modificador = stab * variabilidad * this.getTipo().getEfectividadContra(tipoEnemigo);
         float poder = (((2 * nivel / 5 + 2) * potencia * tipoAtk / dfEnemigo) / 50 + 2) * modificador;
         return poder;
     }
 
     // Método para calcular el daño recibido
-    public void daño(Ataque ataqueElegido, Pokemon enemigo){
+    public void atacar(Ataque ataqueElegido, Pokemon enemigo){
 
         short dfEnemigo, tipoAtk;
         if (ataqueElegido.getTipo() == TipoAtaque.FISICO) {

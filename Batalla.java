@@ -1,32 +1,24 @@
 import java.util.ArrayList;  
-import java.util.Random;     
-import java.util.Scanner;    
+import java.util.Random;
 
 public class Batalla {
     
     // Objetos globales
-    static Scanner scanner = new Scanner(System.in); // Leer entradas por consola
-    static Random random = new Random();             // Generar aleatoriedad
+    static Random random = new Random(); // Generar aleatoriedad
 
     // Método principal para iniciar una batalla entre dos entrenadores
-    public static void batallaPorEquipos(Entrenador e1, Entrenador e2) {
-        System.out.println("\n ¡Comienza la batalla entre " + e1.getNombre() + " y " + e2.getNombre() + "!");
+    public static void batallaPorEquipos(Entrenador e1, Pokemon elegido1, Entrenador e2, Pokemon elegido2) {
 
         // Creamos listas con los Pokémon disponibles (copias del equipo original)
         ArrayList<Pokemon> disponibles1 = new ArrayList<Pokemon>(e1.getEquipo());
         ArrayList<Pokemon> disponibles2 = new ArrayList<Pokemon>(e2.getEquipo());
 
         // Seleccionamos el primer Pokémon que participará del equipo (menos HP o aleatorio)
-        Pokemon activo1 = seleccionarInicial(disponibles1);
-        Pokemon activo2 = seleccionarInicial(disponibles2);
-
-        int turno = 1; // Contador de turnos
+        Pokemon activo1 = elegido1;
+        Pokemon activo2 = elegido2;
 
         // Mientras ambos entrenadores tengan Pokémones disponibles, continúa la batalla
         while (!disponibles1.isEmpty() && !disponibles2.isEmpty()) {
-            System.out.println("\n--- TURNO " + turno + " ---");
-            System.out.println(e1.getNombre() + " - " + activo1.getNombre() + " (HP: " + activo1.getHp() + ")");
-            System.out.println(e2.getNombre() + " - " + activo2.getNombre() + " (HP: " + activo2.getHp() + ")");
 
             // Definimos el orden de ataque
             Pokemon primero, segundo;
@@ -58,12 +50,11 @@ public class Batalla {
             }
 
             // El primer Pokémon ataca
-            System.out.println("\n" + entrenadorPrimero.getNombre() + " ataca:");
-            primero.atacar(segundo);
+            primero.atacar(elegirAtaque(), segundo);
 
             // Si el segundo muere, se elimina de la lista y se elige uno nuevo
             if (!segundo.getVivo()) {
-                System.out.println(segundo.getNombre() + " ha sido derrotado.");
+                // El Pokemon ha sido derrotado
                 if (entrenadorSegundo == e1) {
                     disponibles1.remove(segundo);
                     if (!disponibles1.isEmpty()) {
@@ -75,17 +66,15 @@ public class Batalla {
                         activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
                     }
                 }
-                turno++;
                 continue; // Saltamos al siguiente turno
             }
 
             // El segundo Pokémon contraataca
-            System.out.println("\n" + entrenadorSegundo.getNombre() + " contraataca:");
-            segundo.atacar(primero);
+            segundo.atacar(elegirAtaque(), primero);
 
             // Si el primero muere, se elimina y se elige uno nuevo
             if (!primero.getVivo()) {
-                System.out.println(primero.getNombre() + " ha sido derrotado.");
+                // El Pokemon ha sido derrotado
                 if (entrenadorPrimero == e1) {
                     disponibles1.remove(primero);
                     if (!disponibles1.isEmpty()) {
@@ -98,56 +87,27 @@ public class Batalla {
                     }
                 }
             }
-
-            turno++; // Aumenta el turno
+            continue;
         }
 
         // Mensaje final con el ganador
         if (disponibles1.isEmpty()) {
-            System.out.println("\n ¡" + e2.getNombre() + " gana la batalla!");
             e2.celebracion();
         } else {
-            System.out.println("\n ¡" + e1.getNombre() + " gana la batalla!");
             e1.celebracion();
         }
     }
 
-    // Método que selecciona el primer Pokémon del equipo
-    public static Pokemon seleccionarInicial(ArrayList<Pokemon> equipo) {
-        Pokemon rapido = equipo.get(0);
-        for (Pokemon p : equipo) {
-            if (p.getVelocidad() > rapido.getVelocidad()) {
-                rapido = p;
-            } else if (p.getVelocidad() == rapido.getVelocidad() && random.nextBoolean()) {
-                rapido = p; // Aleatorio si empatan en Velocidad
-            }
-        }
-        return rapido;
+    // MÉTODOS elegirAtaque() y elegirNuevoPokemon() candidatos para ser del Controlador
+
+    public static Ataque elegirAtaque() {
+        // Método para elegir ataque (desde Interfaz o Terminal)
+        return null;
     }
 
     // Método para elegir un nuevo Pokémon si el actual es derrotado
     public static Pokemon elegirNuevoPokemon(Entrenador entrenador, ArrayList<Pokemon> disponibles) {
-        System.out.println("\n" + entrenador.getNombre() + ", elige un nuevo Pokémon:");
-        for (int i = 0; i < disponibles.size(); i++) {
-            System.out.println((i + 1) + ". " + disponibles.get(i).getNombre() + " (HP: " + disponibles.get(i).getHp() + ")");
-        }
-        int opcion;
-        while(true){
-            if (scanner.hasNextInt()) {
-                opcion = scanner.nextInt();
-                scanner.nextLine();
-                if (opcion<=disponibles.size() && opcion>0){
-                    disponibles.get(opcion - 1).entrada();
-                    return disponibles.get(opcion - 1);
-                } else {
-                    System.out.println("¡Ey! Elige una opción válida");
-                    scanner.nextLine();
-                }
-            }
-            else {
-                System.out.println("Por favor, elige un número.");
-                scanner.nextLine();
-            }
-        }
+        // Desde Interfaz o Terminal
+        return null;
     }
 }
