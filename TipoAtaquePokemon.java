@@ -1,37 +1,84 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public enum TipoAtaquePokemon {
     
-    //Constantes del enum: cada tipo de ataque tiene un nombre y una lista de ataques asociados
-    // Los nombres de los ataques son inventados por el mejor creador de ataques por lo que son los mejores ataques creados
-    FUEGO(new String[]{"Infiernum", "inceniracion derretidora", "Ultrafuego", "Calor infrajuliano", "Explosion infernal", "Lavabosa", "fueguisimo", "Latigo lava", "Bola de fuego", "Llamarada"}, null),
-    AGUA(new String[]{"Tsunami", "Olas mangnificas", "Hydroespada", "Ventisca helada", "Gotas abismales", "Rafagahidro", "Superchapuson", "Cascadadon", "Bombaguaso", "Chorrito de agua"}, null),
-    PLANTA(new String[]{"Humoextravenenoso", "Lazos venenoso", "Espiral de espinas", "Semillerar", "Rodatronco", "Raices opresivas", "Enredadera", "Cañon frutas", "lluvia de hojas", "Hojazo"}, null),
-    ELECTRICO(new String[]{"Rayolaser", "Electrorapinito", "Ferroinstataque", "Impacto sobrelectrizante", "Megatormenta electrica", "Corriente de rayos", "Descarga", "Electrimaximo", "Corrientazo", "Chispas"}, null),
-    TIERRA(new String[]{"Montaña", "Sumergimiento placoso", "Bloque diamante", "Lodo Hyperarenoso", "Lanzamontes", "Enmurallar", "Apreton de arcilla", "Tierra sucias", "Rocal", "Polvo"},null);
+    FUEGO(new String[]{
+        "85 Infiernum (E)", "95 Inceniracion derretidora (E)", "110 Ultrafuego (F)", "70 Calor infrajuliano (E)", 
+        "120 Explosion infernal (F)", "60 Lavabosa (E)", "105 Fueguisimo (F)", "75 Latigo lava (F)", 
+        "90 Bola de fuego (E)", "100 Llamarada (E)"
+    }),
+    AGUA(new String[]{
+        "100 Tsunami (E)", "80 Olas magnificas (F)", "95 Hydroespada (F)", "85 Ventisca helada (E)", 
+        "75 Gotas abismales (E)", "70 Rafagahidro (E)", "110 Superchapuson (F)", "90 Cascadadon (F)", 
+        "95 Bombaguaso (E)", "40 Chorrito de agua (F)"
+    }),
+    PLANTA(new String[]{
+        "60 Humoextravenenoso (E)", "65 Lazos venenoso (E)", "85 Espiral de espinas (F)", "70 Semillerar (E)", 
+        "80 Rodatronco (F)", "95 Raices opresivas (E)", "90 Enredadera (F)", "100 Cañon frutas (F)", 
+        "75 Lluvia de hojas (E)", "85 Hojazo (F)"
+    }),
+    ELECTRICO(new String[]{
+        "100 Rayolaser (E)", "80 Electrorapinito (F)", "90 Ferroinstataque (F)", "95 Impacto sobrelectrizante (E)", 
+        "110 Megatormenta electrica (E)", "85 Corriente de rayos (F)", "70 Descarga (F)", "120 Electrimaximo (E)", 
+        "100 Corrientazo (F)", "60 Chispas (F)"
+    }),
+    TIERRA(new String[]{
+        "95 Montaña (E)", "90 Sumergimiento placoso (F)", "85 Bloque diamante (F)", "70 Lodo Hyperarenoso (E)", 
+        "100 Lanzamontes (F)", "60 Enmurallar (E)", "80 Apreton de arcilla (F)", "65 Tierra sucias (E)", 
+        "75 Rocal (F)", "50 Polvo (F)"
+    });
 
-// Atributos de cada tipo de ataque: 'ataques' es una lista de nombres de ataques que pertenecen a ese tipo.
     private String[] ataques;
-    private TipoAtaquePokemon[] counter;
+    private static final Map<TipoAtaquePokemon, Map<TipoAtaquePokemon, Float>> efectividad = new HashMap<>();
 
-// Constructor del enum: recibe los ataques y los counters
-    private TipoAtaquePokemon(String[] ataques, TipoAtaquePokemon[] counter) {
+    private TipoAtaquePokemon(String[] ataques) {
         this.ataques = ataques;
-        this.counter = counter;
     }
-// Método público para obtener los ataques de un tipo
+
+    static { 
+        efectividad.put(PLANTA, new HashMap<>() {{
+            put(PLANTA, 0.5f);
+            put(ELECTRICO, 1.0f);
+            put(FUEGO, 0.5f);
+            put(TIERRA, 2.0f);
+            put(AGUA, 0.5f);
+        }});
+        efectividad.put(ELECTRICO, new HashMap<>() {{
+            put(PLANTA, 0.5f);
+            put(ELECTRICO, 0.5f);
+            put(FUEGO, 1.0f);
+            put(TIERRA, 0.0f);
+            put(AGUA, 2.0f);
+        }});
+        efectividad.put(FUEGO, new HashMap<>() {{
+            put(PLANTA, 2.0f);
+            put(ELECTRICO, 1.0f);
+            put(FUEGO, 0.5f);
+            put(TIERRA, 1.0f);
+            put(AGUA, 0.5f);
+        }});
+        efectividad.put(TIERRA, new HashMap<>() {{
+            put(PLANTA, 0.5f);
+            put(ELECTRICO, 2.0f);
+            put(FUEGO, 2.0f);
+            put(TIERRA, 1.0f);
+            put(AGUA, 1.0f);
+        }});
+        efectividad.put(AGUA, new HashMap<>() {{
+            put(PLANTA, 2.0f);
+            put(ELECTRICO, 1.0f);
+            put(FUEGO, 2.0f);
+            put(TIERRA, 2.0f);
+            put(AGUA, 0.5f);
+        }});
+    }
+
     public String[] getAtaques() {
         return ataques;
     }
-// Método  para obtener los tipos que contrarrestan a este tipo
-    public TipoAtaquePokemon[] getCounter() {
-        return counter;
-    }
-     // Bloque estático: se ejecuta una vez al cargar la clase
-    // Aquí es donde realmente se asignan los tipos que contrarrestan a cada tipo de pokemon
-    static { 
-        FUEGO.counter = new TipoAtaquePokemon[]{AGUA};
-        AGUA.counter = new TipoAtaquePokemon[]{PLANTA};
-        PLANTA.counter = new TipoAtaquePokemon[]{FUEGO};
-        ELECTRICO.counter = new TipoAtaquePokemon[]{TIERRA, PLANTA};
-        TIERRA.counter = new TipoAtaquePokemon[]{ELECTRICO, AGUA};
+
+    public float getEfectividadContra(TipoAtaquePokemon tipoDefensor) {
+        return efectividad.get(this).getOrDefault(tipoDefensor, 1.0f);
     }
 }

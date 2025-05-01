@@ -32,18 +32,18 @@ public class Batalla {
             Pokemon primero, segundo;
             Entrenador entrenadorPrimero, entrenadorSegundo;
 
-            if (activo1.getHp() < activo2.getHp()) {
+            if (activo1.getVelocidad() > activo2.getVelocidad()) {
                 primero = activo1;
                 segundo = activo2;
                 entrenadorPrimero = e1;
                 entrenadorSegundo = e2;
-            } else if (activo2.getHp() < activo1.getHp()) {
+            } else if (activo2.getVelocidad() > activo1.getVelocidad()) {
                 primero = activo2;
                 segundo = activo1;
                 entrenadorPrimero = e2;
                 entrenadorSegundo = e1;
             } else {
-                // Si tienen el mismo HP, elegimos aleatoriamente quién ataca primero
+                // Si tienen la misma velocidad, elegimos aleatoriamente quién ataca primero
                 if (random.nextBoolean()) {
                     primero = activo1;
                     segundo = activo2;
@@ -114,15 +114,15 @@ public class Batalla {
 
     // Método que selecciona el primer Pokémon del equipo
     public static Pokemon seleccionarInicial(ArrayList<Pokemon> equipo) {
-        Pokemon menor = equipo.get(0);
+        Pokemon rapido = equipo.get(0);
         for (Pokemon p : equipo) {
-            if (p.getHp() < menor.getHp()) {
-                menor = p;
-            } else if (p.getHp() == menor.getHp() && random.nextBoolean()) {
-                menor = p; // Aleatorio si empatan en HP
+            if (p.getVelocidad() > rapido.getVelocidad()) {
+                rapido = p;
+            } else if (p.getVelocidad() == rapido.getVelocidad() && random.nextBoolean()) {
+                rapido = p; // Aleatorio si empatan en Velocidad
             }
         }
-        return menor;
+        return rapido;
     }
 
     // Método para elegir un nuevo Pokémon si el actual es derrotado
