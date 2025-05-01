@@ -1,7 +1,18 @@
 import java.util.ArrayList;  
 import java.util.Random;
 
-public class Batalla {
+/*
+ *  EN RESUMEN:
+ * Interacción que tiene con el usuario:
+ *  
+ * 1. capturarEntrenador(nombre, primero, segundo, tercero) ---> Solicita nombre de entrenador y los 3 nombres de los pokemones
+ * 2. batallaPorEquipos(e1, elegido1, e2, elegido2) ---> Solicita pokemon elegido por cada uno para iniciar
+ * 3. elegirAtaque(atacante) ---> Recibe el nuevo ataque del usuario
+ * 4. elegirNuevoPokemon(entrenador, disponibles) ---> Recibe el nuevo pokemon del usuario
+ * 
+ */
+
+public class Batalla implements interaccionUsuario {
     
     // Objetos globales
     static Random random = new Random(); // Generar aleatoriedad
@@ -50,7 +61,7 @@ public class Batalla {
             }
 
             // El primer Pokémon ataca
-            primero.atacar(elegirAtaque(), segundo);
+            //primero.atacar(elegirAtaque(atacante), segundo);
 
             // Si el segundo muere, se elimina de la lista y se elige uno nuevo
             if (!segundo.getVivo()) {
@@ -58,19 +69,19 @@ public class Batalla {
                 if (entrenadorSegundo == e1) {
                     disponibles1.remove(segundo);
                     if (!disponibles1.isEmpty()) {
-                        activo1 = elegirNuevoPokemon(entrenadorSegundo, disponibles1);
+                        //activo1 = elegirNuevoPokemon(entrenadorSegundo, disponibles1);
                     }
                 } else {
                     disponibles2.remove(segundo);
                     if (!disponibles2.isEmpty()) {
-                        activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
+                        //activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
                     }
                 }
                 continue; // Saltamos al siguiente turno
             }
 
             // El segundo Pokémon contraataca
-            segundo.atacar(elegirAtaque(), primero);
+            //segundo.atacar(elegirAtaque(atacante), primero);
 
             // Si el primero muere, se elimina y se elige uno nuevo
             if (!primero.getVivo()) {
@@ -78,12 +89,12 @@ public class Batalla {
                 if (entrenadorPrimero == e1) {
                     disponibles1.remove(primero);
                     if (!disponibles1.isEmpty()) {
-                        activo1 = elegirNuevoPokemon(entrenadorPrimero, disponibles1);
+                        //activo1 = elegirNuevoPokemon(entrenadorPrimero, disponibles1);
                     }
                 } else {
                     disponibles2.remove(primero);
                     if (!disponibles2.isEmpty()) {
-                        activo2 = elegirNuevoPokemon(entrenadorPrimero, disponibles2);
+                        //activo2 = elegirNuevoPokemon(entrenadorPrimero, disponibles2);
                     }
                 }
             }
@@ -99,15 +110,4 @@ public class Batalla {
     }
 
     // MÉTODOS elegirAtaque() y elegirNuevoPokemon() candidatos para ser del Controlador
-
-    public static Ataque elegirAtaque() {
-        // Método para elegir ataque (desde Interfaz o Terminal)
-        return null;
-    }
-
-    // Método para elegir un nuevo Pokémon si el actual es derrotado
-    public static Pokemon elegirNuevoPokemon(Entrenador entrenador, ArrayList<Pokemon> disponibles) {
-        // Desde Interfaz o Terminal
-        return null;
-    }
 }
