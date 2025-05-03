@@ -58,6 +58,11 @@ Pokemon_GUI/
 ├── UML.pdf                      # Diagrama UML del proyecto
 ├── README.md
 └── .gitignore
+```
+
+---
+
+### 📊 Diagrama UML del Juego
 
 ---
 
@@ -67,3 +72,19 @@ Pokemon_GUI/
    git clone https://github.com/saenz22/Pokemon_GUI.git
 =======
 
+---
+
+## 🖼️ Capturas de Pantalla
+
+![Pantalla principal]()
+![Selección de Pokémon]()
+![Combate]()
+
+---
+
+## 🧠 Retos y Aprendizajes
+
+- Implementación de POO y herencia entre clases Pokémon.
+- Manejo de eventos en interfaces gráficas.
+- Coordinación en equipo para dividir responsabilidades.
+- Diseño de interfaces amigables al usuario.
