@@ -184,15 +184,15 @@ public class WindowBatalla extends JFrame implements ActionListener {
     public void setEntrenadorSeleccionando(int entrenadorSeleccionando) {
         this.entrenadorSeleccionando = entrenadorSeleccionando;
     }
-
+    // se coloca final para que no se pueda cambiar el tamaño de la ventana ya que es constante 
     private static final int ALTO_IMAGEN_PKM = 200;
     private static final int ANCHO_INFO_PKM = 250;
-    private static final int ALTO_INFO_PKM_BLOQUE = 35 + 18 + 25 + 10; // Nombre(35?) + Barra(18) + TextoVida(25) + Espacios(10)
+    private static final int ALTO_INFO_PKM_BLOQUE = 35 + 18 + 25 + 10; 
     private static final int ANCHO_BOTON_PANEL = 340;
     private static final int ALTO_BOTON_PANEL = 100;
     private static final int Y_POS_POKEMON_AREA = (int) (ALTO_VENTANA * 0.30);
     private static final int MARGEN_LATERAL = 60;
-    private static final Font FONT_MONO_BOLD_20 = new Font("Monospaced", Font.BOLD, 20);
+    private static final Font FONT_MONO_BOLD_20 = new Font("Monospaced", Font.BOLD, 20);// fuente de las anteriores ventanas
     private static final Font FONT_MONO_PLAIN_15 = new Font("Monospaced", Font.PLAIN, 15);
     private static final Color COLOR_TEXTO_INFO = Color.WHITE;
 // imagenes de fondo y pokemon (aleatorias las ultimas)
@@ -231,7 +231,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
             RUTA_IMAGENES + "PT1.png",
             RUTA_IMAGENES + "PT2.png",
             RUTA_IMAGENES + "PT3.png"
-    };
+    }; 
     private static final Random random = new Random();
     private static final String RUTA_IMG_PKM1 = obtenerrutaaleatoria(RUTAS_PKM1);
     private static final String RUTA_IMG_PKM2 = obtenerrutaaleatoria(RUTAS_PKM2);
@@ -257,7 +257,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private JButton[] botonesAtaque1 = new JButton[4];
     private JButton[] botonesAtaque2 = new JButton[4];
     private JLabel lblTurnoInfo;
-
+ // atributos de la batalla (informacion de los entrenadores y pokemon activos)
     private Entrenador entrenador1;
     private Entrenador entrenador2;
     private Pokemon pokemonActivo1;
@@ -272,7 +272,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
         this.entrenador1 = Objects.requireNonNull(e1, "Entrenador 1 no puede ser null");
         this.entrenador2 = Objects.requireNonNull(e2, "Entrenador 2 no puede ser null");
 
-        this.equipoRestante1 = (e1.getEquipo() != null) ? new ArrayList<>(e1.getEquipo()) : new ArrayList<>();
+        this.equipoRestante1 = (e1.getEquipo() != null) ? new ArrayList<>(e1.getEquipo()) : new ArrayList<>(); // todo por la logica de la batalla recibida por lo anteriormente
         this.equipoRestante2 = (e2.getEquipo() != null) ? new ArrayList<>(e2.getEquipo()) : new ArrayList<>();
 
         this.pokemonActivo1 = seleccionarPokemonInicial(entrenador1, equipoRestante1, 1); // constructores de pokemon
@@ -353,7 +353,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
             return null;
         }
 
-        // Filtrar solo Pokémon válidos y vivos 
+        // Se filtrar solo Pokémon válidos y vivos 
     
         ArrayList<Pokemon> opcionesValidas = new ArrayList<>();
         for (Pokemon p : equipo) {
@@ -373,9 +373,9 @@ public class WindowBatalla extends JFrame implements ActionListener {
         String[] nombresPokemon = new String[opcionesValidas.size()];
         for (int i = 0; i < opcionesValidas.size(); i++) {
             Pokemon p = opcionesValidas.get(i);
-            // No necesitamos verificar p != null aquí porque ya filtramos arriba
+            // No necesitamos verificar p != null aquí porque ya filtramos arriba 
              nombresPokemon[i] = p.getNombre() + " (Nv." + p.getNivel() + ")";
-        }
+        } // compleja esta parte, la de la vida maxima, si esta vivo o no por lo de que tengo que saber si lo hacia de una forma simple no funcionaba. 
 
 
         JComboBox<String> comboBox = new JComboBox<>(nombresPokemon);
