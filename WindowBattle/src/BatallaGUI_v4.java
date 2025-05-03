@@ -175,6 +175,12 @@ public class BatallaGUI_v4 extends JFrame { // Cambiado a v4 para diferenciar
         panelAtaques1.setBounds(xAtaques1, yAtaques, ANCHO_BOTON_PANEL, ALTO_BOTON_PANEL);
         panelAtaques1.setOpaque(false); // Hacer transparente para ver fondo
 
+        /*
+         * ArrayList<Ataque> ataques = pokemonElegido.getAtaques();
+         * 
+         * btnAtaque1_1 = crearBotonAtaque("\"ataques.get(0).getNombre()\"");
+         */
+
         btnAtaque1_1 = crearBotonAtaque("\"Placaje\"");
         btnAtaque1_2 = crearBotonAtaque("\"Ataque Rápido\"");
         btnAtaque1_3 = crearBotonAtaque("\"Rayo\"");
