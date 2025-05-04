@@ -61,7 +61,7 @@ public class Batalla implements interaccionUsuario {
             }
 
             // El primer Pokémon ataca
-            //primero.atacar(elegirAtaque(atacante), segundo);
+            primero.atacar(elegirAtaque(primero), segundo);
 
             // Si el segundo muere, se elimina de la lista y se elige uno nuevo
             if (!segundo.getVivo()) {
@@ -69,12 +69,12 @@ public class Batalla implements interaccionUsuario {
                 if (entrenadorSegundo == e1) {
                     disponibles1.remove(segundo);
                     if (!disponibles1.isEmpty()) {
-                        //activo1 = elegirNuevoPokemon(entrenadorSegundo, disponibles1);
+                        activo1 = elegirNuevoPokemon(entrenadorSegundo, disponibles1);
                     }
                 } else {
                     disponibles2.remove(segundo);
                     if (!disponibles2.isEmpty()) {
-                        //activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
+                        activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
                     }
                 }
                 continue; // Saltamos al siguiente turno
