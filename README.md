@@ -1,4 +1,4 @@
-# 🎮 Pokémon GUI
+# 🎮 Pokémon Battle Simulator GUI
 
 Una aplicación de escritorio desarrollada en Java que simula combates entre Pokémones, permitiendo al usuario utilizar sus Pokémones y disfrutar de una experiencia interactiva tipo videojuego.
 
@@ -37,6 +37,7 @@ Este proyecto tiene como objetivo la creación de una GUI en Java para simular c
 - ☕ Java
 - 🔧 Git y Github
 - 📁 Kanban (Trello o Github projects)
+- 🖼️ Neatbens para la GUI
 - 🧪 UML para diseño de clases y arquitectura
 - 🧠 POO (Programación Orientada a Objetos)
 - 🔔 Programación orientada a eventos
@@ -55,7 +56,7 @@ Pokemon_GUI/
 │   ├── logica/              # Lógica del combate, ataques y estadísticas
 │   
 │
-├── UML.pdf                      # Diagrama UML del proyecto
+├── UML.pdf                  # Diagrama UML del proyecto
 ├── README.md
 └── .gitignore
 ```
@@ -63,14 +64,14 @@ Pokemon_GUI/
 ---
 
 ### 📊 Diagrama UML del Juego
+![Diagrama UML del Juego](image/DiagramaUML.png)
 
 ---
 
-## 🚀 Instrucciones
+## 🚀 Instalación y ejecución
 1. Clonar el repositorio:  
    ```bash
    git clone https://github.com/saenz22/Pokemon_GUI.git
-=======
 
 ---
 
