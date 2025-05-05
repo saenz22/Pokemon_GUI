@@ -1,5 +1,13 @@
 # 🎮 Pokémon Battle Simulator GUI
 
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![GitHub](https://img.shields.io/badge/Git%20&%20GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![Kanban](https://img.shields.io/badge/Kanban-0052CC?style=for-the-badge&logo=trello&logoColor=white)
+![NetBeans](https://img.shields.io/badge/GUI%20con%20NetBeans-1B6AC6?style=for-the-badge&logo=apachenetbeanside&logoColor=white)
+![UML](https://img.shields.io/badge/UML-D63200?style=for-the-badge&logo=simpleicons&logoColor=white)
+![POO](https://img.shields.io/badge/POO-4B0082?style=for-the-badge&logo=abstract&logoColor=white)
+![Eventos](https://img.shields.io/badge/Programaci%C3%B3n%20por%20Eventos-FF69B4?style=for-the-badge&logo=eventbrite&logoColor=white)
+
 Una aplicación de escritorio desarrollada en Java que simula combates entre Pokémones, permitiendo al usuario utilizar sus Pokémones y disfrutar de una experiencia interactiva tipo videojuego.
 
 ---
@@ -77,9 +85,14 @@ Pokemon_GUI/
 
 ## 🖼️ Capturas de Pantalla
 
-![Pantalla principal]()
-![Selección de Pokémon]()
-![Combate]()
+Pantalla Prinicipal
+
+![Pantalla principal](image/poke_principal.png)
+
+Combate
+
+![Combate](image/Captura_combate.png)
+
 
 ---
 
