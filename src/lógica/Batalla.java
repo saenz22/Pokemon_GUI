@@ -1,112 +1,89 @@
+package src.lógica;
+
 import java.util.ArrayList;  
 import java.util.Random;
 
-/*
- *  EN RESUMEN:
- * Interacción que tiene con el usuario:
- *  
- * 1. capturarEntrenador(nombre, primero, segundo, tercero) ---> Solicita nombre de entrenador y los 3 nombres de los pokemones
- * 2. batallaPorEquipos(e1, elegido1, e2, elegido2) ---> Solicita pokemon elegido por cada uno para iniciar
- * 3. elegirAtaque(atacante) ---> Recibe el nuevo ataque del usuario
- * 4. elegirNuevoPokemon(entrenador, disponibles) ---> Recibe el nuevo pokemon del usuario
- * 
- */
-
-public class Batalla implements interaccionUsuario {
+public class Batalla {
     
     // Objetos globales
     static Random random = new Random(); // Generar aleatoriedad
+    Entrenador e1, e2;
+    ArrayList<Pokemon> disponibles1, disponibles2;
+    Pokemon activo1, activo2;
+
+    public Batalla(Entrenador e1, Entrenador e2, Pokemon activo1, Pokemon activo2) {
+        this.e1 = e1;
+        this.e2 = e2;
+        this.activo1 = activo1;
+        this.activo2 = activo2;
+        this.disponibles1 = e1.getEquipo();
+        this.disponibles2 = e2.getEquipo();
+    }
 
     // Método principal para iniciar una batalla entre dos entrenadores
-    public static void batallaPorEquipos(Entrenador e1, Pokemon elegido1, Entrenador e2, Pokemon elegido2) {
+    public static Batalla instanciarBatalla(Entrenador e1, Entrenador e2, Pokemon a1, Pokemon a2) {
+        Batalla batalla = new Batalla(e1, e2, a1, a2);
+        batalla.ordenBatalla();
+        batalla.combate();
+        return batalla;
+    }
 
-        // Creamos listas con los Pokémon disponibles (copias del equipo original)
-        ArrayList<Pokemon> disponibles1 = new ArrayList<Pokemon>(e1.getEquipo());
-        ArrayList<Pokemon> disponibles2 = new ArrayList<Pokemon>(e2.getEquipo());
-
-        // Seleccionamos el primer Pokémon que participará del equipo (menos HP o aleatorio)
-        Pokemon activo1 = elegido1;
-        Pokemon activo2 = elegido2;
-
-        // Mientras ambos entrenadores tengan Pokémones disponibles, continúa la batalla
+    public void combate() {
+        // getAtaqueElegido() --> Getter proveniente de método de WindowBatalla
+        Pokemon atacado;
         while (!disponibles1.isEmpty() && !disponibles2.isEmpty()) {
-
-            // Definimos el orden de ataque
-            Pokemon primero, segundo;
-            Entrenador entrenadorPrimero, entrenadorSegundo;
-
-            if (activo1.getVelocidad() > activo2.getVelocidad()) {
-                primero = activo1;
-                segundo = activo2;
-                entrenadorPrimero = e1;
-                entrenadorSegundo = e2;
-            } else if (activo2.getVelocidad() > activo1.getVelocidad()) {
-                primero = activo2;
-                segundo = activo1;
-                entrenadorPrimero = e2;
-                entrenadorSegundo = e1;
+            atacado = activo2;
+            activo2 = atacarYComprobarEstado(activo1, /*getAtaqueElegido()*/null, disponibles2, activo2);
+            if (activo2 == null) {
+                break;
+            } else if (atacado == activo2) {
+                intercambiarActivos();
+                continue;
             } else {
-                // Si tienen la misma velocidad, elegimos aleatoriamente quién ataca primero
-                if (random.nextBoolean()) {
-                    primero = activo1;
-                    segundo = activo2;
-                    entrenadorPrimero = e1;
-                    entrenadorSegundo = e2;
-                } else {
-                    primero = activo2;
-                    segundo = activo1;
-                    entrenadorPrimero = e2;
-                    entrenadorSegundo = e1;
-                }
+                // Método para mostrar a nuevo Pokemon
+                ordenBatalla();
+                continue;
             }
-
-            // El primer Pokémon ataca
-            primero.atacar(elegirAtaque(primero), segundo);
-
-            // Si el segundo muere, se elimina de la lista y se elige uno nuevo
-            if (!segundo.getVivo()) {
-                // El Pokemon ha sido derrotado
-                if (entrenadorSegundo == e1) {
-                    disponibles1.remove(segundo);
-                    if (!disponibles1.isEmpty()) {
-                        activo1 = elegirNuevoPokemon(entrenadorSegundo, disponibles1);
-                    }
-                } else {
-                    disponibles2.remove(segundo);
-                    if (!disponibles2.isEmpty()) {
-                        activo2 = elegirNuevoPokemon(entrenadorSegundo, disponibles2);
-                    }
-                }
-                continue; // Saltamos al siguiente turno
-            }
-
-            // El segundo Pokémon contraataca
-            //segundo.atacar(elegirAtaque(atacante), primero);
-
-            // Si el primero muere, se elimina y se elige uno nuevo
-            if (!primero.getVivo()) {
-                // El Pokemon ha sido derrotado
-                if (entrenadorPrimero == e1) {
-                    disponibles1.remove(primero);
-                    if (!disponibles1.isEmpty()) {
-                        //activo1 = elegirNuevoPokemon(entrenadorPrimero, disponibles1);
-                    }
-                } else {
-                    disponibles2.remove(primero);
-                    if (!disponibles2.isEmpty()) {
-                        //activo2 = elegirNuevoPokemon(entrenadorPrimero, disponibles2);
-                    }
-                }
-            }
-            continue;
         }
-
-        // Mensaje final con el ganador
-        if (disponibles1.isEmpty()) {
-            e2.celebracion();
-        } else {
+        if (!disponibles1.isEmpty()) {
             e1.celebracion();
+        } else {
+            e2.celebracion();
         }
+    }
+
+    public void intercambiarActivos() {
+        Pokemon temp1 = activo1;
+        Entrenador temp2 = e1;
+        this.activo1 = activo2;
+        this.activo2 = temp1;
+        this.e1 = e2;
+        this.e2 = temp2;
+    }
+
+    public void ordenBatalla() {
+        if (activo2.getVelocidad() > activo1.getVelocidad()) {
+            this.intercambiarActivos();
+        } else if (activo2.getVelocidad() == activo1.getVelocidad()) {
+            if (!random.nextBoolean()) {
+                this.intercambiarActivos();
+            }
+        }
+    }
+
+    public Pokemon atacarYComprobarEstado(Pokemon atacante, Ataque ataqueElegido, ArrayList<Pokemon> equipo, Pokemon pokemon) { 
+        atacante.atacar(ataqueElegido, pokemon);
+        if (!pokemon.getVivo()) {
+            // El Pokemon ha sido derrotado
+            equipo.remove(pokemon);
+            if (!equipo.isEmpty()) {
+                // pokemon = Getter proveniente de método de WindowBatalla
+                return pokemon;
+            } else {
+                return null;
+            }
+        }
+        return pokemon;
     }
 
     // MÉTODOS elegirAtaque() y elegirNuevoPokemon() candidatos para ser del Controlador

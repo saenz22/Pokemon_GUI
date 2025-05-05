@@ -1,3 +1,5 @@
+package src.lógica;
+
 public class Ataque {
 
     // Atributos

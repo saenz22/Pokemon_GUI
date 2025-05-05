@@ -1,3 +1,5 @@
+package src.lógica;
+
 import java.util.ArrayList;
 
 public class Pokemon extends SerVivo {

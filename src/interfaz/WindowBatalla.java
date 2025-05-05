@@ -1,3 +1,8 @@
+package src.interfaz;
+
+import src.lógica.Ataque;
+import src.lógica.Entrenador;
+import src.lógica.Pokemon;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -195,7 +200,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private static final Font FONT_MONO_BOLD_20 = new Font("Monospaced", Font.BOLD, 20);// fuente de las anteriores ventanas
     private static final Font FONT_MONO_PLAIN_15 = new Font("Monospaced", Font.PLAIN, 15);
     private static final Color COLOR_TEXTO_INFO = Color.WHITE;
-// imagenes de fondo y pokemon (aleatorias las ultimas)
+    // imagenes de fondo y pokemon (aleatorias las ultimas)
     private static final String RUTA_IMAGENES = "image/";
     private static final String RUTA_FONDO = RUTA_IMAGENES + "Estadio.jpg"; 
     private static final String[] RUTAS_PKM1 = {
@@ -257,7 +262,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private JButton[] botonesAtaque1 = new JButton[4];
     private JButton[] botonesAtaque2 = new JButton[4];
     private JLabel lblTurnoInfo;
- // atributos de la batalla (informacion de los entrenadores y pokemon activos)
+    // atributos de la batalla (informacion de los entrenadores y pokemon activos)
     private Entrenador entrenador1;
     private Entrenador entrenador2;
     private Pokemon pokemonActivo1;
@@ -269,11 +274,12 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private int entrenadorSeleccionando = 0;
 
     public WindowBatalla(Entrenador e1, Entrenador e2) {
-        this.entrenador1 = Objects.requireNonNull(e1, "Entrenador 1 no puede ser null");
-        this.entrenador2 = Objects.requireNonNull(e2, "Entrenador 2 no puede ser null");
 
-        this.equipoRestante1 = (e1.getEquipo() != null) ? new ArrayList<>(e1.getEquipo()) : new ArrayList<>(); // todo por la logica de la batalla recibida por lo anteriormente
-        this.equipoRestante2 = (e2.getEquipo() != null) ? new ArrayList<>(e2.getEquipo()) : new ArrayList<>();
+        this.entrenador1 = e1;
+        this.entrenador2 = e2;
+        this.equipoRestante1 = e1.getEquipo();
+        this.equipoRestante2 = e2.getEquipo();
+        setVisible(true);
 
         this.pokemonActivo1 = seleccionarPokemonInicial(entrenador1, equipoRestante1, 1); // constructores de pokemon
         this.pokemonActivo2 = seleccionarPokemonInicial(entrenador2, equipoRestante2, 2);
@@ -329,8 +335,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
 
         determinarPrimerTurno();
         configurarTurno();
-
-        setVisible(true);
     }
 
     // Metodos de Inicialización 
@@ -348,10 +352,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
 
 
     private Pokemon seleccionarPokemonInicial(Entrenador entrenador, ArrayList<Pokemon> equipo, int numEntrenador) {
-        if (equipo == null || equipo.isEmpty()) {
-            System.err.println("Error: El equipo del Entrenador " + numEntrenador + " está vacío o es nulo.");
-            return null;
-        }
 
         // Se filtrar solo Pokémon válidos y vivos 
     
@@ -359,8 +359,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
         for (Pokemon p : equipo) {
             if (p != null && p.getVivo()) {
                 opcionesValidas.add(p);
-            } else if (p == null) {
-                System.err.println("Advertencia: Pokémon nulo encontrado en el equipo inicial del Entrenador " + numEntrenador);
             }
         }
 
@@ -416,7 +414,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
         for (int i = 0; i < 4; i++) {
             botonesAtaque1[i] = crearBotonAtaque("Ataque " + (i + 1)); // Texto temporal de los ataques 1
             final int index = i;
-            botonesAtaque1[i].addActionListener(e -> ejecutarAtaque(1, index));
+            botonesAtaque1[i].addActionListener(_ -> ejecutarAtaque(1, index));
             panelAtaques1.add(botonesAtaque1[i]);
         }
         panelAtaques2 = new JPanel(new GridLayout(2, 2, 6, 6));
@@ -425,7 +423,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
         for (int i = 0; i < 4; i++) {
             botonesAtaque2[i] = crearBotonAtaque("Ataque " + (i + 1)); // Texto temporal de los ataques 2
             final int index = i;
-            botonesAtaque2[i].addActionListener(e -> ejecutarAtaque(2, index));
+            botonesAtaque2[i].addActionListener(_-> ejecutarAtaque(2, index));
             panelAtaques2.add(botonesAtaque2[i]);
         }
     }
@@ -784,7 +782,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
              btnOp1.setText(opcion1.getNombre() + " Nv." + opcion1.getNivel());
              btnOp1.setVisible(true);
              btnOp1.setEnabled(true);
-             btnOp1.addActionListener(e -> seleccionarNuevoPokemon(indexEntrenador, opcion1));
+             btnOp1.addActionListener(_ -> seleccionarNuevoPokemon(indexEntrenador, opcion1));
          } else {
               System.err.println("Error: Opción 1 de Pokémon para seleccionar es null.");
               btnOp1.setText("[Error]");
@@ -798,7 +796,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
                  btnOp2.setText(opcion2.getNombre() + " Nv." + opcion2.getNivel());
                  btnOp2.setVisible(true);
                  btnOp2.setEnabled(true);
-                 btnOp2.addActionListener(e -> seleccionarNuevoPokemon(indexEntrenador, opcion2));
+                 btnOp2.addActionListener(_ -> seleccionarNuevoPokemon(indexEntrenador, opcion2));
              } else {
                  System.err.println("Error: Opción 2 de Pokémon para seleccionar es null.");
                  btnOp2.setText("[Error]");
@@ -1010,24 +1008,15 @@ public class WindowBatalla extends JFrame implements ActionListener {
         int vidaPorNivel = 5;
         return vidaBase + (p.getNivel() * vidaPorNivel);
     } //esta parte de abajo se peude borrar si ya esta en el archivo Main
-    public static void main(String[] args) {
+    
+}
 
-         final Entrenador testE1;
-         final Entrenador testE2;
-         try {
-             testE1 = Entrenador.capturarEntrenador("Ash", "Pikachu", "Bulbasaur", "Squirtle");
-             testE2 = Entrenador.capturarEntrenador("Gary", "Eevee", "Charmander", "Rattata");
-         } catch (Exception e) {
-             System.err.println("Error al crear entrenadores o Pokémon de prueba en main: " + e.getMessage());
-             e.printStackTrace();
-             JOptionPane.showMessageDialog(null, "Error creando los datos de prueba.\nAsegúrate que los Pokémon existen y revisa la consola.", "Error de Prueba", JOptionPane.ERROR_MESSAGE);
-             return;
-         }
-        SwingUtilities.invokeLater(() -> new WindowBatalla (testE1, testE2));
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
-} 
+/*
+ * 
+ * 1. Cargar imagenes de los pokemon
+ * 2. Organizar actualización de vida
+ * 
+ * 
+ * 
+ * 
+ */

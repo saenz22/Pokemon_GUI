@@ -1,11 +1,13 @@
+package src.interfaz;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
+
+import src.lógica.Entrenador;
 
 public class WindowBuilder extends JFrame implements ActionListener, KeyListener { // Implementamos ActionListener
     
@@ -474,8 +478,7 @@ private JPanel showSixthPanel() {
             switch (currentPanel) {
                 case 2:switchToNextPanel(showThirdPanel());
                     break;
-                case 3:
-                       
+                case 3:   
                     nombre1 = jugador1Field.getText(); // Obtener el texto del primer campo
                     nombre2 = jugador2Field.getText(); // Obtener el texto del segundo campo
                     if (nombre1.isEmpty() || nombre2.isEmpty()) {
@@ -487,21 +490,32 @@ private JPanel showSixthPanel() {
                 case 4:switchToNextPanel(showFifthPanel());
                     break;
                 case 5:
-                pokemon1 =  poke1Field.getText();
-                pokemon2 =  poke2Field.getText();
-                pokemon3 =  poke3Field.getText();
-                if (pokemon1.isEmpty() || pokemon2.isEmpty() || pokemon3.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Por favor, ingrese todos los nombres.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    switchToNextPanel(showSixthPanel());
-                }
-                System.out.println(pokemon1 + " " + pokemon2 + " " + pokemon3);
+                    pokemon1 =  poke1Field.getText();
+                    pokemon2 =  poke2Field.getText();
+                    pokemon3 =  poke3Field.getText();
+                    if (pokemon1.isEmpty() || pokemon2.isEmpty() || pokemon3.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Por favor, ingrese todos los nombres.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        switchToNextPanel(showSixthPanel());
+                    }
+                    System.out.println(pokemon1 + " " + pokemon2 + " " + pokemon3);
+                    break;
+                case 6:
+                    pokemon4 =  poke4Field.getText();
+                    pokemon5 =  poke5Field.getText();
+                    pokemon6 =  poke6Field.getText();
+                    if (pokemon4.isEmpty() || pokemon5.isEmpty() || pokemon6.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Por favor, ingrese todos los nombres.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        setVisible(false);
+                        dispose();
+                    }
+                    System.out.println(pokemon4 + " " + pokemon5 + " " + pokemon6);
+                    break;
                 default:
                     break;
             }
-          // Cambiar al tercer panel
         }
-    
     }
 
     @Override

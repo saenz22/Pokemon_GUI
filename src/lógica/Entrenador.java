@@ -1,3 +1,5 @@
+package src.lógica;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Entrenador extends SerVivo {
