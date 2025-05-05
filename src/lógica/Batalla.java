@@ -28,12 +28,12 @@ public class Batalla {
         return batalla;
     }
 
-    public void combate() {
+    public void combate(Ataque ataqueElegido) {
         // getAtaqueElegido() --> Getter proveniente de método de WindowBatalla
         Pokemon atacado;
         while (!disponibles1.isEmpty() && !disponibles2.isEmpty()) {
             atacado = activo2;
-            activo2 = atacarYComprobarEstado(activo1, /*getAtaqueElegido()*/null, disponibles2, activo2);
+            activo2 = atacarYComprobarEstado(activo1, ataqueElegido, disponibles2, activo2);
             if (activo2 == null) {
                 break;
             } else if (atacado == activo2) {
@@ -77,7 +77,7 @@ public class Batalla {
             // El Pokemon ha sido derrotado
             equipo.remove(pokemon);
             if (!equipo.isEmpty()) {
-                // pokemon = Getter proveniente de método de WindowBatalla
+                pokemon = elegirNuevoPokemon(equipo);
                 return pokemon;
             } else {
                 return null;
