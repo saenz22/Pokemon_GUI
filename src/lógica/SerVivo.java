@@ -1,3 +1,5 @@
+
+
 public abstract class SerVivo {
 
     // Esta es la clase Padre de Entrenador y Pokemon

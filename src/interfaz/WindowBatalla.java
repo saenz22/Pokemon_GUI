@@ -10,17 +10,170 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-
 public class WindowBatalla extends JFrame implements ActionListener {
 
-    //<editor-fold defaultstate="collapsed" desc="Constantes y Variables de instancia (sin cambios estructurales)">
-    // --- Constantes ---
     private static final int ANCHO_VENTANA = 800;
     private static final int ALTO_VENTANA = 800;
     private static final int ANCHO_IMAGEN_PKM = 200;
     private static final int ALTO_IMAGEN_PKM = 200;
     private static final int ANCHO_INFO_PKM = 250;
     private static final int ALTO_INFO_PKM_BLOQUE = 35 + 18 + 25 + 10;
+ 
+    public void setPbVidaPokemon2(JProgressBar pbVidaPokemon2) {
+        this.pbVidaPokemon2 = pbVidaPokemon2;
+    }
+
+    public JPanel getPanelAtaques1() {
+        return panelAtaques1;
+    }
+
+    public void setPanelAtaques1(JPanel panelAtaques1) {
+        this.panelAtaques1 = panelAtaques1;
+    }
+
+    public JPanel getPanelAtaques2() {
+        return panelAtaques2;
+    }
+
+    public void setPanelAtaques2(JPanel panelAtaques2) {
+        this.panelAtaques2 = panelAtaques2;
+    }
+
+    public JPanel getPanelSeleccionPokemon1() {
+        return panelSeleccionPokemon1;
+    }
+
+    public void setPanelSeleccionPokemon1(JPanel panelSeleccionPokemon1) {
+        this.panelSeleccionPokemon1 = panelSeleccionPokemon1;
+    }
+
+    public JPanel getPanelSeleccionPokemon2() {
+        return panelSeleccionPokemon2;
+    }
+
+    public void setPanelSeleccionPokemon2(JPanel panelSeleccionPokemon2) {
+        this.panelSeleccionPokemon2 = panelSeleccionPokemon2;
+    }
+
+    public JButton getBtnSeleccionarPokemon1_Op1() {
+        return btnSeleccionarPokemon1_Op1;
+    }
+
+    public void setBtnSeleccionarPokemon1_Op1(JButton btnSeleccionarPokemon1_Op1) {
+        this.btnSeleccionarPokemon1_Op1 = btnSeleccionarPokemon1_Op1;
+    }
+
+    public JButton getBtnSeleccionarPokemon1_Op2() {
+        return btnSeleccionarPokemon1_Op2;
+    }
+
+    public void setBtnSeleccionarPokemon1_Op2(JButton btnSeleccionarPokemon1_Op2) {
+        this.btnSeleccionarPokemon1_Op2 = btnSeleccionarPokemon1_Op2;
+    }
+
+    public JButton getBtnSeleccionarPokemon2_Op1() {
+        return btnSeleccionarPokemon2_Op1;
+    }
+
+    public void setBtnSeleccionarPokemon2_Op1(JButton btnSeleccionarPokemon2_Op1) {
+        this.btnSeleccionarPokemon2_Op1 = btnSeleccionarPokemon2_Op1;
+    }
+
+    public JButton getBtnSeleccionarPokemon2_Op2() {
+        return btnSeleccionarPokemon2_Op2;
+    }
+
+    public void setBtnSeleccionarPokemon2_Op2(JButton btnSeleccionarPokemon2_Op2) {
+        this.btnSeleccionarPokemon2_Op2 = btnSeleccionarPokemon2_Op2;
+    }
+
+    public JButton[] getBotonesAtaque1() {
+        return botonesAtaque1;
+    }
+
+    public void setBotonesAtaque1(JButton[] botonesAtaque1) {
+        this.botonesAtaque1 = botonesAtaque1;
+    }
+
+    public JButton[] getBotonesAtaque2() {
+        return botonesAtaque2;
+    }
+
+    public void setBotonesAtaque2(JButton[] botonesAtaque2) {
+        this.botonesAtaque2 = botonesAtaque2;
+    }
+
+    public Entrenador getEntrenador1() {
+        return entrenador1;
+    }
+
+    public void setEntrenador1(Entrenador entrenador1) {
+        this.entrenador1 = entrenador1;
+    }
+
+    public Entrenador getEntrenador2() {
+        return entrenador2;
+    }
+
+    public void setEntrenador2(Entrenador entrenador2) {
+        this.entrenador2 = entrenador2;
+    }
+
+    public Pokemon getPokemonActivo1() {
+        return pokemonActivo1;
+    }
+
+    public void setPokemonActivo1(Pokemon pokemonActivo1) {
+        this.pokemonActivo1 = pokemonActivo1;
+    }
+
+    public Pokemon getPokemonActivo2() {
+        return pokemonActivo2;
+    }
+
+    public void setPokemonActivo2(Pokemon pokemonActivo2) {
+        this.pokemonActivo2 = pokemonActivo2;
+    }
+
+    public ArrayList<Pokemon> getEquipoRestante1() {
+        return equipoRestante1;
+    }
+
+    public void setEquipoRestante1(ArrayList<Pokemon> equipoRestante1) {
+        this.equipoRestante1 = equipoRestante1;
+    }
+
+    public ArrayList<Pokemon> getEquipoRestante2() {
+        return equipoRestante2;
+    }
+
+    public void setEquipoRestante2(ArrayList<Pokemon> equipoRestante2) {
+        this.equipoRestante2 = equipoRestante2;
+    }
+
+    public boolean isTurnoEntrenador1() {
+        return turnoEntrenador1;
+    }
+
+    public void setTurnoEntrenador1(boolean turnoEntrenador1) {
+        this.turnoEntrenador1 = turnoEntrenador1;
+    }
+
+    public boolean isSeleccionPendiente() {
+        return seleccionPendiente;
+    }
+
+    public void setSeleccionPendiente(boolean seleccionPendiente) {
+        this.seleccionPendiente = seleccionPendiente;
+    }
+
+    public int getEntrenadorSeleccionando() {
+        return entrenadorSeleccionando;
+    }
+
+    public void setEntrenadorSeleccionando(int entrenadorSeleccionando) {
+        this.entrenadorSeleccionando = entrenadorSeleccionando;
+    }
     private static final int ANCHO_BOTON_PANEL = 340;
     private static final int ALTO_BOTON_PANEL = 100;
     private static final int Y_POS_POKEMON_AREA = (int) (ALTO_VENTANA * 0.30);
@@ -29,16 +182,45 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private static final Font FONT_MONO_PLAIN_15 = new Font("Monospaced", Font.PLAIN, 15);
     private static final Color COLOR_TEXTO_INFO = Color.WHITE;
 
-    private static final String RUTA_IMAGENES = "image/"; // Asegúrate que esta ruta sea correcta
+    private static final String RUTA_IMAGENES = "image/"; 
     private static final String RUTA_FONDO = RUTA_IMAGENES + "Estadio.jpg";
-    private static final String[] RUTAS_PKM1 = { RUTA_IMAGENES + "PE1.png", /* ... otras rutas ... */ }; // Completa tus rutas
-    private static final String[] RUTAS_PKM2 = { RUTA_IMAGENES + "PP1.png", /* ... otras rutas ... */ }; // Completa tus rutas
+    private static final String[] RUTAS_PKM1 = {  RUTA_IMAGENES + "PE1.png",
+        RUTA_IMAGENES + "PE2.png",
+        RUTA_IMAGENES + "PE3.png",
+        RUTA_IMAGENES + "PP1.png",
+        RUTA_IMAGENES + "PP2.png",
+        RUTA_IMAGENES + "PP3.png",
+        RUTA_IMAGENES + "PF1.png",
+        RUTA_IMAGENES + "PF2.png",
+        RUTA_IMAGENES + "PF3.png",
+        RUTA_IMAGENES + "PA1.png",
+        RUTA_IMAGENES + "PA2.png",
+        RUTA_IMAGENES + "PA3.png",
+        RUTA_IMAGENES + "PT1.png",
+        RUTA_IMAGENES + "PT2.png",
+        RUTA_IMAGENES + "PT3.png"
+    };
+    private static final String[] RUTAS_PKM2 = {
+        RUTA_IMAGENES + "PP1.png",
+        RUTA_IMAGENES + "PP2.png",
+        RUTA_IMAGENES + "PP3.png",
+        RUTA_IMAGENES + "PA1.png",
+        RUTA_IMAGENES + "PA2.png",
+        RUTA_IMAGENES + "PA3.png",
+        RUTA_IMAGENES + "PE1.png",
+        RUTA_IMAGENES + "PE2.png",
+        RUTA_IMAGENES + "PE3.png",
+        RUTA_IMAGENES + "PF1.png",
+        RUTA_IMAGENES + "PF2.png",
+        RUTA_IMAGENES + "PF3.png",
+        RUTA_IMAGENES + "PT1.png",
+        RUTA_IMAGENES + "PT2.png",
+        RUTA_IMAGENES + "PT3.png"
+    }; 
     private static final Random random = new Random();
     private static final String RUTA_IMG_PKM1 = obtenerrutaaleatoria(RUTAS_PKM1);
     private static final String RUTA_IMG_PKM2 = obtenerrutaaleatoria(RUTAS_PKM2);
 
-
-    // --- Componentes UI ---
     private JPanel panelPrincipal;
     private JLabel lblImagenPokemon1, lblNombrePokemon1, lblVidaTextoPokemon1;
     private JProgressBar pbVidaPokemon1;
@@ -55,20 +237,18 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private JButton[] botonesAtaque2 = new JButton[4];
     private JLabel lblTurnoInfo;
 
-    // --- Estado de la Batalla ---
+    
     private Entrenador entrenador1;
     private Entrenador entrenador2;
     private Pokemon pokemonActivo1; // Se asignará en iniciarBatalla
     private Pokemon pokemonActivo2; // Se asignará en iniciarBatalla
     private ArrayList<Pokemon> equipoRestante1;
     private ArrayList<Pokemon> equipoRestante2;
-    private boolean turnoEntrenador1 = true; // Se determinará en iniciarBatalla
+    private boolean turnoEntrenador1 = true; 
     private boolean seleccionPendiente = false;
     private int entrenadorSeleccionando = 0;
 
-    //</editor-fold>
 
-    // --- *** CONSTRUCTOR MODIFICADO *** ---
     // Solo inicializa componentes y guarda datos, no inicia la lógica de batalla.
     public WindowBatalla(Entrenador e1, Entrenador e2) {
         System.out.println("[Debug WB] Constructor WindowBatalla started."); // Debug
@@ -77,14 +257,14 @@ public class WindowBatalla extends JFrame implements ActionListener {
         this.entrenador1 = Objects.requireNonNull(e1, "Entrenador 1 no puede ser null");
         this.entrenador2 = Objects.requireNonNull(e2, "Entrenador 2 no puede ser null");
 
-        // Inicializa listas de equipo (copia para no modificar el original)
+        // Inicializa listas de equipo (copia para no modificar el original) claramente
         this.equipoRestante1 = (e1.getEquipo() != null) ? new ArrayList<>(e1.getEquipo()) : new ArrayList<>();
         this.equipoRestante2 = (e2.getEquipo() != null) ? new ArrayList<>(e2.getEquipo()) : new ArrayList<>();
 
         // Configuración básica de la ventana
         setTitle("Batalla Pokémon: " + entrenador1.getNombre() + " vs " + entrenador2.getNombre());
         setSize(ANCHO_VENTANA, ALTO_VENTANA);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Importante: DISPOSE, no EXIT
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -107,16 +287,16 @@ public class WindowBatalla extends JFrame implements ActionListener {
         setContentPane(panelPrincipal);
 
         // Inicializa TODOS los componentes gráficos
-        System.out.println("[Debug WB] Initializing UI components..."); // Debug
+        System.out.println("[Debug WB] Initializing UI components..."); 
         inicializarPanelesAtaques();
         inicializarPanelesSeleccion();
         inicializarComponentesEntrenador1();
         inicializarComponentesEntrenador2();
         inicializarInfoTurno();
-        System.out.println("[Debug WB] UI components initialized."); // Debug
+        System.out.println("[Debug WB] UI components initialized."); 
 
         // Añade los componentes al panel principal
-        System.out.println("[Debug WB] Adding components to panel..."); // Debug
+        System.out.println("[Debug WB] Adding components to panel..."); 
         panelPrincipal.add(panelInfoPokemon1);
         panelPrincipal.add(lblImagenPokemon1);
         panelPrincipal.add(panelInfoPokemon2);
@@ -126,24 +306,20 @@ public class WindowBatalla extends JFrame implements ActionListener {
         panelPrincipal.add(panelSeleccionPokemon1);
         panelPrincipal.add(panelSeleccionPokemon2);
         panelPrincipal.add(lblTurnoInfo);
-         System.out.println("[Debug WB] Components added."); // Debug
+         System.out.println("[Debug WB] Components added."); 
 
-        // NO LLAMAR a setVisible(true) aquí.
-        // NO LLAMAR a seleccionarPokemonInicial, determinarPrimerTurno, configurarTurno aquí.
 
-        System.out.println("[Debug WB] Constructor WindowBatalla finished."); // Debug
+        System.out.println("[Debug WB] Constructor WindowBatalla finished."); 
     }
 
-    // --- *** NUEVO MÉTODO PARA INICIAR LA LÓGICA DE BATALLA *** ---
     public void iniciarBatalla() {
         System.out.println("[Debug WB] iniciarBatalla started.");
 
-        // --- Selección Inicial de Pokémon (Muestra JOptionPanes) ---
         System.out.println("[Debug WB] Starting initial Pokemon selection...");
         this.pokemonActivo1 = seleccionarPokemonInicial(entrenador1, equipoRestante1, 1);
         this.pokemonActivo2 = seleccionarPokemonInicial(entrenador2, equipoRestante2, 2);
 
-        // --- Validar Selección ---
+   
         if (pokemonActivo1 == null || pokemonActivo2 == null) {
             System.err.println("Selección inicial cancelada o fallida. Cerrando ventana de batalla.");
             JOptionPane.showMessageDialog(this, // 'this' es el JFrame de batalla
@@ -165,7 +341,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
         determinarPrimerTurno();
         System.out.println("[Debug WB] First turn determined.");
 
-        // --- Configurar UI para el Primer Turno ---
+        //  Configurar UI para el Primer Turno 
         System.out.println("[Debug WB] Configuring turn UI...");
         configurarTurno();
         System.out.println("[Debug WB] Turn UI configured.");
@@ -177,8 +353,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
         System.out.println("[Debug WB] iniciarBatalla finished.");
     }
 
-
-    //<editor-fold defaultstate="collapsed" desc="Métodos de Inicialización UI (sin cambios estructurales)">
     private void determinarPrimerTurno() {
         if (pokemonActivo1 == null || pokemonActivo2 == null) {
              System.err.println("Error: No se puede determinar el primer turno sin Pokémon activos.");
@@ -207,7 +381,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
         // Filtrar solo Pokémon válidos y vivos
         ArrayList<Pokemon> opcionesValidas = new ArrayList<>();
         for (Pokemon p : equipo) {
-            if (p != null && p.getVivo()) { // Asume que Pokemon tiene getVivo()
+            if (p != null && p.getVivo()) { 
                 opcionesValidas.add(p);
             } else {
                 System.err.println("Advertencia: Pokémon nulo o no vivo encontrado en equipo inicial de Entrenador " + numEntrenador + ": " + (p != null ? p.getNombre() : "NULL"));
@@ -415,12 +589,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
     }
 
     private static String obtenerrutaaleatoria(String[] rutas) {
-        // Manejo de caso donde el array es vacío o nulo
-         if (rutas == null || rutas.length == 0) {
-             System.err.println("Advertencia: El array de rutas de imagen está vacío o es nulo.");
-             // Devolver una ruta por defecto o null, según prefieras
-             return RUTA_IMAGENES + "default.png"; // Ejemplo de ruta por defecto
-         }
         int indice = random.nextInt(rutas.length);
         return rutas[indice];
     }
@@ -454,10 +622,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
         }
         return img; // Devuelve la BufferedImage cargada
     }
-
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Métodos de Actualización UI y Lógica Batalla (sin cambios estructurales)">
 
     private void actualizarInfoPokemon(int entrenadorIndex, Pokemon nuevoPokemon) {
          if (nuevoPokemon == null) {
@@ -579,9 +743,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
                 }
             }
         }
-         // La habilitación final depende del turno, se hace en configurarTurno
     }
-
     private void ejecutarAtaque(int indexAtacante, int indexAtaque) {
         // --- Validaciones Previas ---
         // 1. No ejecutar si hay selección pendiente
@@ -756,15 +918,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
         JLabel lblInfo = (indexEntrenador == 1) ? lblSeleccionInfo1 : lblSeleccionInfo2;
         JButton btnOp1 = (indexEntrenador == 1) ? btnSeleccionarPokemon1_Op1 : btnSeleccionarPokemon2_Op1;
         JButton btnOp2 = (indexEntrenador == 1) ? btnSeleccionarPokemon1_Op2 : btnSeleccionarPokemon2_Op2;
-
-         // Verificar que los componentes no sean null (importante)
-         if (panelSeleccion == null || panelAtaquesOcultar == null || lblInfo == null || btnOp1 == null || btnOp2 == null) {
-              System.err.println("Error crítico: Componente GUI nulo en mostrarPanelSeleccion para Entrenador " + indexEntrenador + ".");
-              // Podría intentar finalizar la batalla o simplemente loggear el error
-              finalizarBatalla(indexEntrenador == 1 ? 2 : 1);
-              return;
-         }
-
         // Configurar texto informativo
         lblInfo.setText(pkmDebilitado + " debilitado. Elige:");
 
@@ -829,14 +982,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
     private void seleccionarNuevoPokemon(int indexEntrenador, Pokemon nuevoPokemon) {
          System.out.println("[Debug WB] Entrenador " + indexEntrenador + " seleccionó a " + nuevoPokemon.getNombre());
 
-         if (nuevoPokemon == null) {
-             System.err.println("Error crítico: Se intentó seleccionar un Pokémon null.");
-             agregarMensaje("Error al seleccionar. Intenta de nuevo o reinicia.");
-             // Podríamos intentar mostrar el panel de nuevo, pero es arriesgado
-             // O finalizar la batalla
-             finalizarBatalla(indexEntrenador == 1 ? 2 : 1);
-             return;
-         }
          // Validar si el Pokémon seleccionado está realmente vivo (doble chequeo)
          if (!nuevoPokemon.getVivo()) {
               System.err.println("Error Lógico: Se seleccionó un Pokémon (" + nuevoPokemon.getNombre() + ") que no está vivo.");
@@ -1103,7 +1248,6 @@ public class WindowBatalla extends JFrame implements ActionListener {
         return Math.max(1, vidaMax); // Asegurar que sea al menos 1
     }
 
-    // --- Método main (MODIFICADO para usar el nuevo flujo de inicialización) ---
     // Útil para probar WindowBatalla directamente
     public static void main(String[] args) {
          System.out.println("[Debug WB] Ejecutando main de WindowBatalla para prueba...");
@@ -1122,9 +1266,7 @@ public class WindowBatalla extends JFrame implements ActionListener {
                  "Error creando los datos de prueba.\nAsegúrate que los Pokémon existen y revisa la consola.\nError: " + e.getMessage(),
                  "Error de Prueba", JOptionPane.ERROR_MESSAGE);
              return; // Salir si no se pueden crear los entrenadores
-         }
-
-         // Necesitamos pasar final para usar dentro de invokeLater
+            }   
          final Entrenador finalE1 = testE1;
          final Entrenador finalE2 = testE2;
 
@@ -1135,29 +1277,21 @@ public class WindowBatalla extends JFrame implements ActionListener {
 
              System.out.println("[Debug WB] Haciendo visible WindowBatalla desde main...");
              ventanaBatalla.setVisible(true);
-
-             // Llamar a iniciarBatalla DESPUÉS de setVisible(true)
              System.out.println("[Debug WB] Llamando a iniciarBatalla desde main...");
-             // No necesitamos invokeLater aquí porque ya estamos dentro de uno
              ventanaBatalla.iniciarBatalla();
               System.out.println("[Debug WB] Flujo de main completado.");
          });
     }
 
-
-    // Implementación requerida por ActionListener (aunque no la usemos directamente aquí)
     @Override
     public void actionPerformed(ActionEvent e) {
         // Puedes dejarlo vacío o añadir lógica si algún componente usa esta ventana como listener
         System.out.println("ActionEvent recibido por WindowBatalla: " + e.getActionCommand());
-        // throw new UnsupportedOperationException("ActionListener no implementado específicamente en WindowBatalla.");
+   
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Getters y Setters (Opcional - si los necesitas)">
-    // Puedes añadir getters/setters para componentes o estado si son necesarios desde fuera
     public JProgressBar getPbVidaPokemon1() { return pbVidaPokemon1; }
     public JProgressBar getPbVidaPokemon2() { return pbVidaPokemon2; }
-    // ... otros getters/setters ...
-    //</editor-fold>
+ 
 
-} // Fin de la clase WindowBatalla
+} 
