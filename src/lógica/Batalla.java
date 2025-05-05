@@ -19,14 +19,6 @@ public class Batalla {
         this.disponibles2 = e2.getEquipo();
     }
 
-    // Método principal para iniciar una batalla entre dos entrenadores
-    public static Batalla instanciarBatalla(Entrenador e1, Entrenador e2, Pokemon a1, Pokemon a2) {
-        Batalla batalla = new Batalla(e1, e2, a1, a2);
-        batalla.ordenBatalla();
-        batalla.combate();
-        return batalla;
-    }
-
     public void combate(Ataque ataqueElegido) {
         // getAtaqueElegido() --> Getter proveniente de método de WindowBatalla
         Pokemon atacado;
@@ -49,6 +41,13 @@ public class Batalla {
         } else {
             e2.celebracion();
         }
+    }
+     // Método principal para iniciar una batalla entre dos entrenadores
+     public static Batalla instanciarBatalla(Entrenador e1, Entrenador e2, Pokemon a1, Pokemon a2) {
+        Batalla batalla = new Batalla(e1, e2, a1, a2);
+        batalla.ordenBatalla();
+        batalla.combate(null);
+        return batalla;
     }
 
     public void intercambiarActivos() {
@@ -84,6 +83,11 @@ public class Batalla {
         }
         return pokemon;
     }
+    // Método para elegir un nuevo Pokémon
+    public Pokemon elegirNuevoPokemon(ArrayList<Pokemon> equipo) {
+        // Implementación básica: elegir el primer Pokémon disponible
+        return equipo.get(0);
+    }
 
     // MÉTODOS elegirAtaque() y elegirNuevoPokemon() candidatos para ser del Controlador
-}
+}   
